@@ -2,6 +2,9 @@ html {
     scroll-behavior: smooth;
     font-family:Helvetica, sans-serif
 }
+a {
+    text-decoration: none;
+}
 header {
     background-color: slategray ;
     color: whitesmoke;
@@ -11,11 +14,23 @@ body {
     background-color: #FEF5EA;
 }
 
+.wrapper {
+    display: flex;
+    align-items: top;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
 main {
     margin: auto;
     width: 60%;
-    border: solid thin red;
+    
+    font-size: larger;
 }
 h1 {
     font-size:xx-large ;
+    font-style: bold;
+    color: slategray;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
