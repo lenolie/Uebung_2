@@ -78,20 +78,32 @@
                 </p>
             </section>
         </main>
-        <div class="table_of_contents">
-            <h3>Table of contents</h3>
-            <ul>
-                <li><a href="#Introduction">Introduction</a></li>
-                <li><a href="#The_Lynx’s_Historical_Range">The_Lynx’s_Historical_Ranges</a></li>
-                <li><a href="#Hints_and_Hope">Hints and Hope</a></li>
-                <li><a href="#Project_Reintroduction">Project Reintroduction</a></li>
-                <li><a href="#Ecological_Impact">Ecological Impact</a></li>
-                <li><a href="#A_Shared_Journey">A Shared Journey</a></li>
-                <li><a href="#Conclusion">Conclusion</a></li>
-                <li><a href="#References">References</a></li>
-            </ul>
+        <div class="right">
+            <div class="table_of_contents">
+                <h3>Table of contents</h3>
+                <ul>
+                    <li><a href="#Introduction">Introduction</a></li>
+                    <li><a href="#The_Lynx’s_Historical_Range">The_Lynx’s_Historical_Ranges</a></li>
+                    <li><a href="#Hints_and_Hope">Hints and Hope</a></li>
+                    <li><a href="#Project_Reintroduction">Project Reintroduction</a></li>
+                    <li><a href="#Ecological_Impact">Ecological Impact</a></li>
+                    <li><a href="#A_Shared_Journey">A Shared Journey</a></li>
+                    <li><a href="#Conclusion">Conclusion</a></li>
+                    <li><a href="#References">References</a></li>
+                </ul>
+            </div>
+            <div class="quiz-container">
+                <h2>Was trinkt der Lynx am liebsten?</h2>
+                <div class="draggable-items">
+                    <div draggable="true">Kaffee</div>
+                    <div draggable="true">Tee</div>
+                    <div draggable="true">Espresso</div>
+                    <div draggable="true">Wasser</div>
+                </div>
+                <div class="dropbox">Drop it!</div>
+                <div class="auswahl"> Hier kommt ein Ergebniss</div>
+            </div>
         </div>
-
 
     </div>
 
@@ -130,23 +142,48 @@
                     //Falls es Unterkapitel hat, vermerke das nicht, da wir dann auch die Unterkapitel anschauen müssen
                     if (!info.hasSubChapters)madeOneVisible = true;
                     }   
-            }
-        });
-
-           
-        // den Observer auf alle Unterkapitel anwenden & Infos zu den Elementen speichern
-        const infos = [];
-        sections.forEach((section) => {
-            infos.push({
-                id: section.id,
-                visible:false,
-                //vermerkt, ob ein Element Unterkapitel hat
-                hasSubChapters: Array.from(section.children).some((el) => el.tagName === "SECTION")
+                }
             });
 
-            observer.observe(section);
+           
+            // den Observer auf alle Unterkapitel anwenden & Infos zu den Elementen speichern
+            const infos = [];
+            sections.forEach((section) => {
+                infos.push({
+                    id: section.id,
+                    visible:false,
+                    //vermerkt, ob ein Element Unterkapitel hat
+                    hasSubChapters: Array.from(section.children).some((el) => el.tagName === "SECTION")
+                });
+
+                observer.observe(section);
+            });
+        }
+
+        //Drag and Drop
+        const droppedStuff = [];
+
+        const draggableItems = document.querySelectorAll(".draggable-items *");
+        const dropbox = document.querySelector(".dropbox");
+        const auswahl = document.querySelector(".auswahl");
+
+        draggableItems.forEach(function (element) {
+            element.addEventListener("dragstart", function (e) {
+                e.dataTransfer.setData("text/plain", e.target.innerText);
+            });
+        } );
+
+        dropbox.addEventListener("dragover", function(e) {
+            //prevent default to allow drop
+            e.preventDefault();
         });
-    }
+
+        dropbox.addEventListener("drop", function(dropEvent) {
+            const data = dropEvent.dataTransfer.getData("text/plain");
+            droppedStuff.push(data);
+            auswahl.innerText = 
+                "You have selected " + droppedStuff.length + " thing(s)! They are: " + droppedStuff;
+        })
 
     </script>
     
