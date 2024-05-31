@@ -16,6 +16,7 @@
                 “The Elusive Lynx Returns: A New Species in the Palatinate Forest”
             </h1>
         
+            <!--MIt cmd + shift + p, wrap with blabla auswählen und in section unterteilen-->
             <section id="Introduction">
                 <h2>Introduction</h2>
                 <p>
@@ -100,8 +101,8 @@
                     <div draggable="true">Espresso</div>
                     <div draggable="true">Wasser</div>
                 </div>
-                <div class="dropbox">Drop it!</div>
-                <div class="auswahl"> Hier kommt ein Ergebniss</div>
+                <div class="dropbox" id="foo">Drop it!</div>
+                <div class="auswahl" id="foo"> Hier kommt ein Ergebniss</div>
             </div>
         </div>
 
@@ -123,21 +124,36 @@
                 const theSection = infos.find((info) => info.id === entry.target.id);
                 //aktualisiere die Sichtbarkeitsinfo
                 theSection.visible = entry.isIntersecting;
+
+                const fritz = "foo";
+
+
+                const foo = {
+                    name: "Fritz",
+                    foody: function () {
+                        console.log("hello")
+                    }
+                }
+
+                foo.foody();
+
+
             }
 
             //setze Stylings aller Links in TOC zurück
             for (const info of infos) {
-                document.querySelector('nav li a[href="#${info.id}"]').parentElement.classList.remove("active");
+                const selector = `div li a[href="#${info.id}"]`;
+                document.querySelector(selector).parentElement.classList.remove("active");
             }
 
             //gehe über alle Infos, die wir zu unseren Section-Tags gesammelt haben 
             for (const info of infos) {
-                //wenn wir ein sichtbares haben und noch keines als solches gestyled hanem
+                //wenn wir ein sichtbares haben und noch keines als solches gestyled haben
                 //also: wenn wir bereits eines gestyled haben, wollen wir in diesen Abschnitt nicht mehr rein!
                 //denn wir wollen ja nur das oberste Element stylen!
                 if(info.visible === true && madeOneVisible === false) {
                     //style das Element, d.h. setze eine Klasse
-                    document.querySelector('nav li a[href="#${info.id}"]').parentElement.classList.add("active");
+                    document.querySelector(`div li a[href="#${info.id}"]`).parentElement.classList.add("active");
                     //wenn das Element keine Unterkapitel hat, vermerke, dass wir schon eines gestyled haben
                     //Falls es Unterkapitel hat, vermerke das nicht, da wir dann auch die Unterkapitel anschauen müssen
                     if (!info.hasSubChapters)madeOneVisible = true;
@@ -160,6 +176,9 @@
             });
         }
 
+        //wenn man Funktionen verwendet muss man sie auch aufrufen!
+        upgradeTableOfContents();
+        
         //Drag and Drop
         const droppedStuff = [];
 
@@ -184,7 +203,7 @@
             auswahl.innerText = 
                 "You have selected " + droppedStuff.length + " thing(s)! They are: " + droppedStuff;
         })
-
+        
     </script>
     
 </body>

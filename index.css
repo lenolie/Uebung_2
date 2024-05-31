@@ -52,7 +52,7 @@ h1 {
 ul {
     list-style-type: none;
     border-left: solid 3px slategray;
-    padding: 2px;
+    padding: 4px;
 }
 
 .quiz-container {
@@ -80,4 +80,7 @@ div [draggable] {
     padding: 5px;
     margin: 5px;
     text-align: center;
+}
+.active {
+    font-weight: bold;
 }
