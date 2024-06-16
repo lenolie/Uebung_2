@@ -10,7 +10,6 @@ header {
     color: whitesmoke;
     padding: 10px;
     width: 100%;
-    position: fixed;
 }
 body {
     background-color: #FEF5EA;
@@ -28,7 +27,7 @@ main {
     margin: auto;
     width: 60%;
     font-size: larger;
-    padding-top: 80px;
+    padding-top: 40px;
     padding-right: 5%;
 }
 h1 {
@@ -37,6 +36,10 @@ h1 {
     color: slategray;
     margin-top: 40px;
     margin-bottom: 40px;
+}
+:target {
+    border-left: 4px solid slategray;
+    padding: 0 1rem;
 }
 .right {
     width: 20%;
@@ -47,12 +50,16 @@ h1 {
 .table_of_contents {
     width: 100%;
     padding-bottom: 20px;
-    padding-top: 80px;
+    padding-top: 40px;
 }
 ul {
     list-style-type: none;
     border-left: solid 3px slategray;
     padding: 4px;
+}
+
+.readThis {
+    font-size: xx-large;
 }
 
 .quiz-container {
